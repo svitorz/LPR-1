@@ -4,6 +4,8 @@
  */
 package Exercicio02;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author svitorz
@@ -26,21 +28,114 @@ public class ClienteVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pageTitle = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
+        inputName = new javax.swing.JTextField();
+        labelRG = new javax.swing.JLabel();
+        labelIdade = new javax.swing.JLabel();
+        inputRG = new javax.swing.JTextField();
+        inputIdade = new javax.swing.JTextField();
+        btnNomeRG = new javax.swing.JButton();
+        btnNomeIdade = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pageTitle.setFont(new java.awt.Font("Liberation Mono", 3, 18)); // NOI18N
+        pageTitle.setText("CLIENTE");
+
+        labelName.setText("Nome:");
+
+        labelRG.setText("RG:");
+
+        labelIdade.setText("Idade:");
+
+        btnNomeRG.setText("Nome e RG");
+        btnNomeRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNomeRGActionPerformed(evt);
+            }
+        });
+
+        btnNomeIdade.setText("Nome e Idade");
+        btnNomeIdade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNomeIdadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputName)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pageTitle)
+                        .addGap(266, 266, 266))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(labelRG)
+                        .addGap(27, 27, 27)
+                        .addComponent(inputRG, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                        .addGap(62, 62, 62)
+                        .addComponent(labelIdade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNomeRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNomeIdade))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelName)
+                    .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelRG)
+                    .addComponent(labelIdade)
+                    .addComponent(inputRG, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(133, 133, 133)
+                .addComponent(btnNomeRG)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btnNomeIdade)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    ClienteCTR ctr = new ClienteCTR();    
+    ClienteDTO dto = new ClienteDTO();
+    
+    private void btnNomeRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNomeRGActionPerformed
+        // TODO add your handling code here:
+        dto.setName(inputName.getText());
+        dto.setRg(inputRG.getText());
+        JOptionPane.showMessageDialog(null, ctr.mostrarNomeRg(dto));
+    }//GEN-LAST:event_btnNomeRGActionPerformed
+
+    private void btnNomeIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNomeIdadeActionPerformed
+        // TODO add your handling code here:        
+        dto.setName(inputName.getText());
+        dto.setIdade(Integer.parseInt(inputIdade.getText()));
+        JOptionPane.showMessageDialog(null, ctr.mostrarNomeIdade(dto));
+    }//GEN-LAST:event_btnNomeIdadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +173,14 @@ public class ClienteVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNomeIdade;
+    private javax.swing.JButton btnNomeRG;
+    private javax.swing.JTextField inputIdade;
+    private javax.swing.JTextField inputName;
+    private javax.swing.JTextField inputRG;
+    private javax.swing.JLabel labelIdade;
+    private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelRG;
+    private javax.swing.JLabel pageTitle;
     // End of variables declaration//GEN-END:variables
 }
