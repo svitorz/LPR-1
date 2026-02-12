@@ -90,6 +90,7 @@ public class PrincipalView extends javax.swing.JFrame {
         ClienteView cliView = new ClienteView();
         this.desktopPane.add(cliView);
         cliView.setVisible(true);
+        cliView.setPosicao();
     }
     
     private void exit(){
