@@ -4,7 +4,12 @@
  */
 package br.com.projeto_1.view;
 
+import br.com.projeto_1.ctr.ClienteCTR;
+import br.com.projeto_1.dto.ClienteDTO;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
 
 /**
  *
@@ -17,8 +22,15 @@ public class ClienteView extends javax.swing.JInternalFrame {
      */
     public ClienteView() {
         initComponents();
+        liberaCampos(false);
+        liberaBotoes(true, false, false, false, true);
     }
-        
+    
+    private ClienteDTO dto = new ClienteDTO();
+    private ClienteCTR ctr = new ClienteCTR();   
+    
+    int gravar_alterar;
+    
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
@@ -74,12 +86,27 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
         btnCancelar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         lblNome.setText("Nome");
 
@@ -111,16 +138,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblCidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cidade_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estado_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(44, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnNovo)
@@ -145,30 +163,35 @@ public class ClienteView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rg_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(lblLogradouro))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblLogradouro1)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblLogradouro))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(logradouro_cli, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(numero_cli)
-                                        .addGap(280, 280, 280))))
+                                    .addComponent(logradouro_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
-                                .addComponent(lblBairro)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblCidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bairro_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cidade_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(lblLogradouro1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(numero_cli)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblBairro)
+                                .addGap(15, 15, 15)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bairro_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblEstado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(estado_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -218,10 +241,85 @@ public class ClienteView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:ç
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        liberaCampos(true);
+        liberaBotoes(false, true, true, false, true);
+        gravar_alterar = 1;
+    }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        if(gravar_alterar == 1){
+            criar();
+            gravar_alterar = 0;
+        }
+        
+        limpaCampos();
+        liberaCampos(false);
+        liberaBotoes(true, false, false, false, true);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        limpaCampos();
+        liberaBotoes(true, false, false, false, true);
+        liberaCampos(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void liberaCampos(boolean permission) {
+        nome_cli.setEnabled(permission);
+        logradouro_cli.setEnabled(permission);
+        bairro_cli.setEnabled(permission);
+        cep_cli.setEnabled(permission);
+        cidade_cli.setEnabled(permission);
+        cpf_cli.setEnabled(permission);
+        estado_cli.setEnabled(permission);
+        numero_cli.setEnabled(permission);
+        rg_cli.setEnabled(permission);
+    }
+    
+    private void limpaCampos() {
+        nome_cli.setText("");
+        logradouro_cli.setText("");
+        bairro_cli.setText("");
+        cep_cli.setText("");
+        cidade_cli.setText("");
+        cpf_cli.setText("");
+        numero_cli.setText("");
+        rg_cli.setText("");
+    }
+    
+    private void liberaBotoes(boolean enableNovo, boolean enableSalvar, boolean enableCancelar, boolean enableExcluir, boolean enableSair) {
+        btnNovo.setEnabled(enableNovo);
+        btnSalvar.setEnabled(enableSalvar);
+        btnCancelar.setEnabled(enableCancelar);
+        btnExcluir.setEnabled(enableExcluir);
+        btnSair.setEnabled(enableSair);
+    }
+
+    private void criar() {
+        try {
+            dto.setNome_cli(nome_cli.getText());
+            dto.setBairro_cli(bairro_cli.getText());
+            dto.setCep_cli(cep_cli.getText());
+            dto.setCidade_cli(cidade_cli.getText());
+            dto.setCpf_cli(cpf_cli.getText());
+            dto.setEstado_cli(String.valueOf(estado_cli.getSelectedItem()));
+            dto.setLogradouro_cli(logradouro_cli.getText());
+            dto.setNumero_cli(Integer.parseInt(numero_cli.getText()));
+            dto.setRg_cli(rg_cli.getText());
+        
+            JOptionPane.showMessageDialog(null, 
+                    ctr.inserirCliString(dto)
+            );
+        } catch (Exception e){
+            System.out.println("Erro ao gravar na ClienteVIEW: " + e);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairro_cli;
     private javax.swing.JButton btnCancelar;
