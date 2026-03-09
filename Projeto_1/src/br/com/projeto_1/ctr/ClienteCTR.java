@@ -30,4 +30,19 @@ public class ClienteCTR {
             return "Cliente não cadastrado.\n";
         } 
     }
+    
+    public ResultSet consultarCliente(ClienteDTO dto, int opcao){
+        ResultSet rs = null;
+        
+        rs = dao.consultarCliente(dto, opcao);
+        
+        return rs;
+    }
+    
+    /*
+    * private methods 
+    */
+    private void CloseDB() {
+        ConexaoDAO.closeDB();
+    }
 }

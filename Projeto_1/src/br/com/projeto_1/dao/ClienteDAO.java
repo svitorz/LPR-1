@@ -56,4 +56,35 @@ public class ClienteDAO {
         }
     }
     
+    public ResultSet consultarCliente(ClienteDTO dto, int opcao) {
+        try {
+            ConexaoDAO.ConnectDB();
+            
+            stmt = ConexaoDAO.conn.createStatement();
+            
+            String consulta = "";
+            
+            switch(opcao) {
+                case 1:
+                    consulta = "select c.* from cliente c where c.nome_cli like '"
+                            + dto.getNome_cli() + "%' order by c.nome_cli;";
+                    break;
+                case 2: 
+                    consulta = "select c.* from cliente c where c.id_cli = "
+                            + dto.getId_cli() + ";";
+                    break;
+                case 3: 
+                    consulta = "select c.* from cliente c where c.id_cli;";
+                    break;
+            }
+            
+            rs = stmt.executeQuery(consulta.toUpperCase());
+            
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Houve um erro ao consultar: " + e.getMessage());
+            return rs;
+        }
+    }
+    
 } // fim da classe
