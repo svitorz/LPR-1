@@ -74,7 +74,7 @@ public class ClienteDAO {
                             + dto.getId_cli() + ";";
                     break;
                 case 3: 
-                    consulta = "select c.* from cliente c where c.id_cli;";
+                    consulta = "select c.* from cliente c;";
                     break;
             }
             
