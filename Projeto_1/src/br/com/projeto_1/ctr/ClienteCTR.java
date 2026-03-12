@@ -42,7 +42,7 @@ public class ClienteCTR {
     /*
     * private methods 
     */
-    private void CloseDB() {
+    public void CloseDB() {
         ConexaoDAO.closeDB();
-    }
+    }   
 }
