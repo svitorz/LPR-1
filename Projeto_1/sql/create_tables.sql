@@ -12,6 +12,4 @@ CREATE TABLE cliente
 	rg_cli character varying(15),
 	CONSTRAINT cliente_pkey PRIMARY KEY (id_cli),
 	CONSTRAINT cliente_cpf_key UNIQUE (cpf_cli)
-)
-
-select * from cliente
+);
