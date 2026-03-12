@@ -1,0 +1,58 @@
+## YAML Template.
+---
+# Use postgres/example user/password credentials
+services:
+  projeto-1-postgres:
+    container_name: projeto-1-postgres
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postdba
+      POSTGRES_USER: postgres
+      POSTGRES_DB: projeto_1
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    ports:
+      - "5433:5432"
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - projeto-1-network
+      
+  pg-admin-projeto-1:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    container_name: projeto-1-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: vitor@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "16543:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin      
+    depends_on:
+        projeto-1-postgres:
+            condition: service_healthy
+    networks:
+      - projeto-1-network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks: 
+  projeto-1-network:
+    driver: bridge
