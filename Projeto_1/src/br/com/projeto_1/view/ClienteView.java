@@ -96,6 +96,11 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
         btnExcluir.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -319,9 +324,18 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private void tableConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableConsultaMouseClicked
         // TODO add your handling code here:
-        preencheCampos(Integer.parseInt(String.valueOf(tableConsulta.getValueAt(tableConsulta.getSelectedRow(), 0))));
+        preencheCampos(Integer.parseInt(
+                String.valueOf(
+                        tableConsulta.getValueAt(
+                                tableConsulta.getSelectedRow(), 0))));
         liberaBotoes(false, true, true, true, true);
     }//GEN-LAST:event_tableConsultaMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        excluir();
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
   private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSairActionPerformed
     // TODO add your handling code here:
@@ -338,8 +352,13 @@ public class ClienteView extends javax.swing.JInternalFrame {
     // TODO add your handling code here:
     if (gravar_alterar == 1) {
       criar();
-      gravar_alterar = 0;
+    } else if(gravar_alterar == 2) {
+        atualizar();
+    } else {
+        JOptionPane.showMessageDialog(null, "Erro no sistema.");
     }
+    
+    gravar_alterar = 0;
 
     limpaCampos();
     liberaCampos(false);
@@ -398,27 +417,43 @@ public class ClienteView extends javax.swing.JInternalFrame {
    */
   private void criar() {
     try {
-      dto.setNome_cli(nome_cli.getText());
-      dto.setBairro_cli(bairro_cli.getText());
-      dto.setCep_cli(cep_cli.getText());
-      dto.setCidade_cli(cidade_cli.getText());
-      dto.setCpf_cli(cpf_cli.getText());
-      dto.setEstado_cli(String.valueOf(estado_cli.getSelectedItem()));
-      dto.setLogradouro_cli(logradouro_cli.getText());
-      dto.setNumero_cli(Integer.parseInt(numero_cli.getText()));
-      dto.setRg_cli(rg_cli.getText());
-
-      JOptionPane.showMessageDialog(null,
-          ctr.inserirCliString(dto));
+        setDto();
+        JOptionPane.showMessageDialog(null,
+            ctr.inserirCliString(dto));
     } catch (Exception e) {
       System.out.println("Erro ao gravar na ClienteVIEW: " + e);
     }
   }
+  
+  private void atualizar(){
+      try {
+          setDto();
+          JOptionPane.showMessageDialog(null, 
+                  ctr.atualizarCliente(dto));
+      } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, "Não atualizado." + e.getMessage());
+      }
+  }
+  
+  private void excluir(){
+      if (JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o cliente?", "Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null,
+                    ctr.excluirCliente(dto)
+            );
+       }
+      limpaCampos();
+      liberaCampos(false);
+      liberaBotoes(true, false, false, false, true);
+      limpaTabela();
+  }
+  
+  private void limpaTabela(){
+      modelo_jtl_consultar.setNumRows(0);
+  }
 
   private void preencheTabela(String nome_cli) {
     try {
-      modelo_jtl_consultar.setNumRows(0);
-
+      limpaTabela();
       dto.setNome_cli(nome_cli);
 
       rs = ctr.consultarCliente(dto, 1);
@@ -457,11 +492,25 @@ public class ClienteView extends javax.swing.JInternalFrame {
         rg_cli.setText(rs.getString("rg_cli"));
 
         gravar_alterar = 2;
-          liberaCampos(true);
+        liberaCampos(true);
       }
     } catch (Exception erTab) {
         JOptionPane.showMessageDialog(null, erTab);
+    } finally {
+      ctr.CloseDB();
     }
+  }
+  
+  private void setDto() {
+      dto.setNome_cli(nome_cli.getText());
+      dto.setBairro_cli(bairro_cli.getText());
+      dto.setCep_cli(cep_cli.getText());
+      dto.setCidade_cli(cidade_cli.getText());
+      dto.setCpf_cli(cpf_cli.getText());
+      dto.setEstado_cli(String.valueOf(estado_cli.getSelectedItem()));
+      dto.setLogradouro_cli(logradouro_cli.getText());
+      dto.setNumero_cli(Integer.parseInt(numero_cli.getText()));
+      dto.setRg_cli(rg_cli.getText());
   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

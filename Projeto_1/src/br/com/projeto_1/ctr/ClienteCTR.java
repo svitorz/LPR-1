@@ -39,6 +39,29 @@ public class ClienteCTR {
         return rs;
     }
     
+    public String atualizarCliente(ClienteDTO dto) {
+        try {
+         if(dao.atualizarCliente(dto)){
+             return "Cliente atualizado com sucesso!";
+         }else {
+             return "Cliente não alterado.";
+         }
+        } catch (Exception e) {
+            return "Ocorreu um erro ao atualizar cliente. Erro:" + e.getMessage();
+        }
+    }
+    
+    public String excluirCliente(ClienteDTO dto){
+        try {
+            if(dao.excluirCliente(dto)){
+                return "Cliente excluído com sucesso!";
+            } else {
+                return "Cliente não excluído.";
+            }
+        } catch (Exception e) {
+            return "Ocorreu um erro ao atualizar o cliente.\nErro:" + e.getMessage();
+        }
+    }
     /*
     * private methods 
     */
