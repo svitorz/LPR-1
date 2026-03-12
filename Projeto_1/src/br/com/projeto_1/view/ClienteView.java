@@ -240,7 +240,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -306,7 +306,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                             .addComponent(btnSalvar)
                             .addComponent(btnNovo)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -420,6 +420,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
             }
         } catch(Exception erTab){
             System.out.println("Erro ao listar clientes: " + erTab);
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao exibir os valores" + erTab);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
