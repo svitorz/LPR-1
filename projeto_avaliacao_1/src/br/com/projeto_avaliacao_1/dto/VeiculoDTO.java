@@ -4,6 +4,7 @@
  */
 package br.com.projeto_avaliacao_1.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -106,13 +107,13 @@ public class VeiculoDTO {
     this.preco = preco;
   }
 
-  public Date getData_cadastro() {
-    return data_cadastro;
-  }
+    private LocalDate data_cadastro;
 
-  public void setData_cadastro(Date data_cadastro) {
-    this.data_cadastro = data_cadastro;
-  }
+    public LocalDate getData_cadastro() {
+        return data_cadastro;
+    }
 
-  Date data_cadastro;
+    public void setData_cadastro(LocalDate data_cadastro) {
+        this.data_cadastro = data_cadastro;
+    }
 }

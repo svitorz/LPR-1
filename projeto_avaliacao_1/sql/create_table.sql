@@ -3,7 +3,7 @@ CREATE TABLE veiculos (
     marca varchar(50),
     modelo varchar(50),
     ano int,
-    color varchar(50),
+    cor varchar(50),
     placa varchar(15),
     chassi varchar(255),
     combustivel varchar(100),

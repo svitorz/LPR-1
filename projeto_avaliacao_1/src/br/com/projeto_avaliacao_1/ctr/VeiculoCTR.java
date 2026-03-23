@@ -1,8 +1,8 @@
-package br.com.projeto_avaliacao_1.ctr.VeiculoCTR;
+package br.com.projeto_avaliacao_1.ctr;
 
 import java.sql.*;
 
-import br.com.projeto_1.dao.ConexaoDAO;
+import br.com.projeto_avaliacao_1.dao.ConexaoDAO;
 import br.com.projeto_avaliacao_1.dao.VeiculoDAO;
 import br.com.projeto_avaliacao_1.dto.VeiculoDTO;
 

@@ -37,9 +37,9 @@ public class VeiculoDAO implements VeiculoDAOI {
           + dto.getChassi() + "', '"
           + dto.getCombustivel() + "', '"
           + dto.getQuilometragem() + "', "
-          + dto.getPreco() + ", "
-          + dto.getProprietario() + ", "
-          + dto.getData_cadastro() + ");";
+          + dto.getPreco() + ", '"
+          + dto.getProprietario() + "', '"
+          + dto.getData_cadastro() + "');";
 
       stmt.execute(query);
 
@@ -68,21 +68,21 @@ public class VeiculoDAO implements VeiculoDAOI {
       switch (opcao) {
         // Busca pelo modelo do veículo
         case 1:
-          query = "SELECT * FROM veiculos WHERE modelo LIKE %" + dto.getModelo();
+          query = "SELECT * FROM veiculos WHERE modelo LIKE '%" + dto.getModelo() + "%';";
           break;
 
         // Busca pelo nome do proprietario do carro
         case 2:
-          query = "SELECT * FROM veiculos WHERE proprietario LIKE %" + dto.getProprietario();
+          query = "SELECT * FROM veiculos WHERE id = " + dto.getId()+ ";";
           break;
 
         case 3:
-          query = "SELECT * FROM veiculos ORDER BY id DESC";
+          query = "SELECT * FROM veiculos ORDER BY id DESC;";
           break;
         default:
           break;
       }
-
+      
       rs = stmt.executeQuery(query);
       return rs;
     } catch (Exception e) {
@@ -99,21 +99,22 @@ public class VeiculoDAO implements VeiculoDAOI {
 
       stmt = ConexaoDAO.conn.createStatement();
 
-      query = "UPDATE veiculos SET"
-          + " marca = " + dto.getMarca() + "', '"
-          + " modelo = " + dto.getModelo() + "',"
-          + " ano = " + dto.getAno() + ", '"
-          + " cor = " + dto.getCor() + "', '"
-          + " placa = " + dto.getPlaca() + "', '"
-          + " chassi = " + dto.getChassi() + "', '"
-          + " combustivel = " + dto.getCombustivel() + "', '"
-          + " quilometragem = " + dto.getQuilometragem() + "', "
+      query = "UPDATE veiculos SET "
+          + " marca = '" + dto.getMarca() + "', "
+          + " modelo = '" + dto.getModelo() + "',"
+          + " ano = " + dto.getAno() + ", "
+          + " cor = '" + dto.getCor() + "', "
+          + " placa = '" + dto.getPlaca() + "', "
+          + " chassi = '" + dto.getChassi() + "', "
+          + " combustivel = '" + dto.getCombustivel() + "', "
+          + " quilometragem = " + dto.getQuilometragem() + ", "
           + " preco = " + dto.getPreco() + ", "
-          + " proprietario = " + dto.getProprietario() + ", "
-          + " data_registro = " + dto.getData_cadastro() + ");";
+          + " proprietario = '" + dto.getProprietario() + "' " 
+              + "WHERE id = " + dto.getId() + ";";
 
       stmt.execute(query);
 
+      
       ConexaoDAO.conn.commit();
 
       stmt.close();
