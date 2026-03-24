@@ -427,6 +427,8 @@ public class VeiculoVIEW extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         liberaCampos(false);
         liberaBotoes(true, false, false, false, true);
+        limpaCampos();
+        limpaTabela();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
   private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNovoActionPerformed
