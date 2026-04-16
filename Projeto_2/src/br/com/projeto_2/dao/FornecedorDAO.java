@@ -28,8 +28,8 @@ public class FornecedorDAO {
             stmt = ConexaoDAO.conn.createStatement();
 
             String comando = "INSERT INTO fornecedor(nome_for, cnpj_for, tel_for, data_cad_for) VALUES ('"
-                    + dto.getNome_for() + "',"
-                    + dto.getCnpj_for() + "',"
+                    + dto.getNome_for() + "','"
+                    + dto.getCnpj_for() + "','"
                     + dto.getTel_for() + "',"
                     + " to_date('" + data_format.format(dto.getData_cad_for()) + "','dd/mm/yyyy'));";
             stmt.execute(comando.toUpperCase());
@@ -61,10 +61,10 @@ public class FornecedorDAO {
                             + dto.getNome_for() + "%' order by nome_for;";
                     break;
                 case 2:
-                    consulta = "select nome_for, cnpj_for, tel_for, tochar(data_cad_for, 'dd/mm/yyyy') as data_cad_for from fornecedor "
+                    consulta = "select nome_for, cnpj_for, tel_for, to_char(data_cad_for, 'dd/mm/yyyy') as data_cad_for from fornecedor "
                             + "where id_for = " + dto.getId_for();
             }
-
+            
             rs = stmt.executeQuery(consulta.toUpperCase());
 
             return rs;
