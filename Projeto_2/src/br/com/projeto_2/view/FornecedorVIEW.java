@@ -121,6 +121,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
 
         inpPesquisa.setNextFocusableComponent(btnPesquisar);
 
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_2/view/imagens/novo.png"))); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.setNextFocusableComponent(inpNome);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +130,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_2/view/imagens/salvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +138,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_2/view/imagens/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +146,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_2/view/imagens/excluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +154,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_2/view/imagens/sair.png"))); // NOI18N
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,7 +359,7 @@ public class FornecedorVIEW extends javax.swing.JInternalFrame {
         inpFDataCad.setEnabled(a);
     }
 
-    private void liberaBotoes(boolean salvar, boolean novo, boolean excluir, boolean cancelar, boolean sair) {
+    private void liberaBotoes(boolean novo, boolean salvar, boolean cancelar, boolean excluir, boolean sair) {
         btnSalvar.setEnabled(salvar);
         btnNovo.setEnabled(novo);
         btnExcluir.setEnabled(excluir);
