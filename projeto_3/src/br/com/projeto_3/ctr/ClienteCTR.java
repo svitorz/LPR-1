@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.projeto_1.ctr;
+package br.com.projeto_3.ctr;
 
-import br.com.projeto_1.dao.ClienteDAO;
-import br.com.projeto_1.dto.ClienteDTO;
-import br.com.projeto_1.dao.ConexaoDAO;
+import br.com.projeto_3.dao.ClienteDAO;
+import br.com.projeto_3.dto.ClienteDTO;
+import br.com.projeto_3.dao.ConexaoDAO;
 import java.sql.ResultSet;
 /**
  *

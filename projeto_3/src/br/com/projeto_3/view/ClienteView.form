@@ -27,47 +27,35 @@
               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblLogradouro1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="numero_cli" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="nome_cli" min="-2" pref="220" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblCidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCep" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblRg" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cidade_cli" max="32767" attributes="0"/>
-                              <Component id="cep_cli" max="32767" attributes="0"/>
-                              <Component id="rg_cli" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnSair" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblLogradouro1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="numero_cli" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="nome_cli" min="-2" pref="220" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblRg" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cidade_cli" max="32767" attributes="0"/>
+                                  <Component id="cep_cli" max="32767" attributes="0"/>
+                                  <Component id="rg_cli" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblLogradouro" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblBairro" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -79,12 +67,24 @@
                           <Component id="estado_cli" min="-2" pref="112" max="-2" attributes="0"/>
                           <Component id="logradouro_cli" pref="217" max="32767" attributes="0"/>
                           <Component id="bairro_cli" max="32767" attributes="0"/>
-                          <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                           <Component id="cpf_cli" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="44" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnSair" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="44" pref="13" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="lblConsulta" min="-2" max="-2" attributes="0"/>
@@ -130,7 +130,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="222" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -162,20 +162,18 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rg_cli" min="-2" pref="35" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="rg_cli" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -235,7 +233,7 @@
           <Font name="Cantarell" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/sair.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/sair.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Sair"/>
       </Properties>
@@ -249,7 +247,7 @@
           <Font name="Cantarell" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/excluir.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/excluir.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
@@ -263,7 +261,7 @@
           <Font name="Cantarell" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/cancelar.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/cancelar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
@@ -277,7 +275,7 @@
           <Font name="Cantarell" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/salvar.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/salvar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
@@ -291,7 +289,7 @@
           <Font name="Cantarell" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/novo.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/novo.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
@@ -421,7 +419,7 @@
     <Component class="javax.swing.JButton" name="btnConsulta">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/br/com/projeto_1/view/imagens/pesquisar.png"/>
+          <Image iconType="3" name="/br/com/projeto_3/view/images/pesquisar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Consultar"/>
       </Properties>

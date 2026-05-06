@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package br.com.projeto_1.view;
+package br.com.projeto_3.view;
 
-import br.com.projeto_1.ctr.ClienteCTR;
-import br.com.projeto_1.dto.ClienteDTO;
+import br.com.projeto_3.ctr.ClienteCTR;
+import br.com.projeto_3.dto.ClienteDTO;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -101,7 +101,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         rg_cli.setNextFocusableComponent(btnSalvar);
 
         btnSair.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/sair.png"))); // NOI18N
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/sair.png"))); // NOI18N
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         });
 
         btnExcluir.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/excluir.png"))); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/excluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +119,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/cancelar.png"))); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +128,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/salvar.png"))); // NOI18N
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/salvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
         });
 
         btnNovo.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/novo.png"))); // NOI18N
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/novo.png"))); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +177,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
         lblConsulta.setText("Nome:");
 
-        btnConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_1/view/imagens/pesquisar.png"))); // NOI18N
+        btnConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/pesquisar.png"))); // NOI18N
         btnConsulta.setText("Consultar");
         btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,38 +226,29 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 .addComponent(lblTituloConsulta)
                 .addGap(110, 110, 110))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblLogradouro1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numero_cli))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblNome)
-                            .addGap(24, 24, 24)
-                            .addComponent(nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCidade)
-                                .addComponent(lblCep)
-                                .addComponent(lblRg))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cidade_cli)
-                                .addComponent(cep_cli)
-                                .addComponent(rg_cli))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSair))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblLogradouro1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(numero_cli))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblNome)
+                                .addGap(24, 24, 24)
+                                .addComponent(nome_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCidade)
+                                    .addComponent(lblCep)
+                                    .addComponent(lblRg))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cidade_cli)
+                                    .addComponent(cep_cli)
+                                    .addComponent(rg_cli))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLogradouro)
                             .addComponent(lblBairro)
@@ -268,9 +259,20 @@ public class ClienteView extends javax.swing.JInternalFrame {
                             .addComponent(estado_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(logradouro_cli, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                             .addComponent(bairro_cli)
-                            .addComponent(btnSalvar)
-                            .addComponent(cpf_cli))))
-                .addGap(13, 13, Short.MAX_VALUE)
+                            .addComponent(cpf_cli))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNovo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblConsulta)
@@ -306,7 +308,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLogradouro1)
@@ -332,16 +334,15 @@ public class ClienteView extends javax.swing.JInternalFrame {
                                 .addComponent(lblRg))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSalvar)
-                                    .addComponent(rg_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
+                                .addComponent(rg_cli, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNovo)
                             .addComponent(btnCancelar)
                             .addComponent(btnExcluir)
-                            .addComponent(btnSair))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnSair)
+                            .addComponent(btnSalvar))
+                        .addGap(15, 15, 15))))
         );
 
         pack();
