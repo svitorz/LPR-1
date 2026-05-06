@@ -6,3 +6,5 @@ CREATE TABLE fornecedor (
   data_cad_for date,
   CONSTRAINT pk_fornecedor PRIMARY KEY(id_for)
 );
+
+
