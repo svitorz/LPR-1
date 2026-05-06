@@ -86,7 +86,7 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void produtoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoMenuItemActionPerformed
-        System.exit(0);
+        abreProdutoView();
     }//GEN-LAST:event_produtoMenuItemActionPerformed
 
     private void sairMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMenuMouseClicked
@@ -101,6 +101,13 @@ public class PrincipalVIEW extends javax.swing.JFrame {
 
     private void abreFornecedorView(){
         FornecedorVIEW view = new FornecedorVIEW();
+        this.desktopPane.add(view);
+        view.setVisible(true);
+        view.setPosicao();
+    }
+    
+    private void abreProdutoView(){
+        ProdutoVIEW view = new ProdutoVIEW();
         this.desktopPane.add(view);
         view.setVisible(true);
         view.setPosicao();
