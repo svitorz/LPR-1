@@ -82,10 +82,10 @@ public class ProdutoDAO {
 
             query = "UPDATE produto SET "
                     + "nome_prod = '" + dto.getNome_prod() + "', "
-                    + "desc_prod = '" + dto.getDesc_prod() + "',"
+                    + "desc_prod = '" + dto.getDesc_prod() + "', "
                     + "cod_bar_prod = '" + dto.getCod_bar_prod() + "', "
                     + "p_custo_prod = '" + dto.getP_custo_prod() + "', "
-                    + "p_venda_prod = '" + dto.getP_venda_prod()+ "', "
+                    + "p_venda_prod = '" + dto.getP_venda_prod()+ "' "
                     + "WHERE id_prod = " + dto.getId_prod()+ ";";
             
             stmt.execute(query.toUpperCase());
