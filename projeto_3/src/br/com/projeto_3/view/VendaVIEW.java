@@ -4,17 +4,56 @@
  */
 package br.com.projeto_3.view;
 
+import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import br.com.projeto_3.dto.VendaDTO;
+import br.com.projeto_3.ctr.VendaCTR;
+import br.com.projeto_3.dto.ProdutoDTO;
+import br.com.projeto_3.ctr.ProdutoCTR;
+import br.com.projeto_3.dto.ClienteDTO;
+import br.com.projeto_3.ctr.ClienteCTR;
+import java.util.Date;
+
 /**
  *
  * @author svitorz
  */
 public class VendaVIEW extends javax.swing.JInternalFrame {
 
+    VendaCTR vendaCTR = new VendaCTR();
+    VendaDTO vendaDTO = new VendaDTO();
+    ProdutoCTR produtoCTR = new ProdutoCTR();
+    ProdutoDTO produtoDTO = new ProdutoDTO();
+    ClienteCTR clienteCTR = new ClienteCTR();
+    ClienteDTO clienteDTO = new ClienteDTO();
+
+    ResultSet rs;
+    DefaultTableModel modelo_jtl_consultar_cli;
+    DefaultTableModel modelo_jtl_consultar_prod;
+    DefaultTableModel modelo_jtl_consultar_prod_selecionado;
+
     /**
      * Creates new form VendaVIEW
      */
     public VendaVIEW() {
         initComponents();
+
+        liberaCampos(false);
+        liberaBotoes(true, false, false, true);
+
+        modelo_jtl_consultar_cli = (DefaultTableModel) jtl_consultar_cliente.getModel();
+        modelo_jtl_consultar_prod = (DefaultTableModel) jtl_consultar_prod.getModel();
+        modelo_jtl_consultar_prod_selecionado = (DefaultTableModel) jtl_consultar_pro_selecionado.getModel();
+
+        limpaCampos();
+
+    }
+
+    public void setPosicao() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }
 
     /**
@@ -28,19 +67,19 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablePesquisaCliente = new javax.swing.JTable();
+        jtl_consultar_cliente = new javax.swing.JTable();
         lblCliente = new javax.swing.JLabel();
-        inpPesquisaCliente = new javax.swing.JTextField();
+        pesquisa_nome_cli = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JButton();
         TotalVenda = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablePesquisaProdutos = new javax.swing.JTable();
+        jtl_consultar_prod = new javax.swing.JTable();
         lblPesquisaNomeProd = new javax.swing.JLabel();
-        inpPesquisaNomeProd = new javax.swing.JTextField();
+        pesquisa_nome_prod = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableProdutoSelecionado = new javax.swing.JTable();
+        jtl_consultar_pro_selecionado = new javax.swing.JTable();
         btnProdRem = new javax.swing.JButton();
         btnProdAdd = new javax.swing.JButton();
         btnPesquisaProd = new javax.swing.JButton();
@@ -51,7 +90,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
 
-        tablePesquisaCliente.setModel(new javax.swing.table.DefaultTableModel(
+        jtl_consultar_cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -62,11 +101,16 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                 "ID", "Nome"
             }
         ));
-        jScrollPane1.setViewportView(tablePesquisaCliente);
+        jScrollPane1.setViewportView(jtl_consultar_cliente);
 
         lblCliente.setText("Cliente:");
 
         btnPesquisaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/pesquisar.png"))); // NOI18N
+        btnPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaClienteActionPerformed(evt);
+            }
+        });
 
         TotalVenda.setText("0.00");
 
@@ -85,7 +129,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inpPesquisaCliente)
+                        .addComponent(pesquisa_nome_cli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -104,7 +148,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(lblCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inpPesquisaCliente))
+                    .addComponent(pesquisa_nome_cli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -116,7 +160,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
 
-        tablePesquisaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jtl_consultar_prod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -124,11 +168,11 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                 "ID", "Nome", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(tablePesquisaProdutos);
+        jScrollPane2.setViewportView(jtl_consultar_prod);
 
         lblPesquisaNomeProd.setText("Descrição:");
 
-        tableProdutoSelecionado.setModel(new javax.swing.table.DefaultTableModel(
+        jtl_consultar_pro_selecionado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,13 +183,33 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                 "ID", "Nome", "Valor", "QTD"
             }
         ));
-        jScrollPane3.setViewportView(tableProdutoSelecionado);
+        jtl_consultar_pro_selecionado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtl_consultar_pro_selecionadoKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jtl_consultar_pro_selecionado);
 
         btnProdRem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/prod_rem.png"))); // NOI18N
+        btnProdRem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdRemActionPerformed(evt);
+            }
+        });
 
         btnProdAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/prod_add.png"))); // NOI18N
+        btnProdAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdAddActionPerformed(evt);
+            }
+        });
 
         btnPesquisaProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/pesquisar.png"))); // NOI18N
+        btnPesquisaProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaProdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -162,7 +226,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblPesquisaNomeProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inpPesquisaNomeProd)
+                                .addComponent(pesquisa_nome_prod)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnPesquisaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,7 +246,7 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(lblPesquisaNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnPesquisaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inpPesquisaNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pesquisa_nome_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,15 +260,35 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/novo.png"))); // NOI18N
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/salvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto_3/view/images/sair.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,6 +332,198 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPesquisaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProdActionPerformed
+        // TODO add your handling code here:
+        preencheTabelaProduto(pesquisa_nome_cli.getText());
+    }//GEN-LAST:event_btnPesquisaProdActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        liberaCampos(true);
+        liberaBotoes(false, true, true, false);
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpaCampos();
+        liberaCampos(false);
+        modelo_jtl_consultar_cli.setNumRows(0);
+        modelo_jtl_consultar_prod.setNumRows(0);
+        liberaBotoes(true, false, false, true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
+        preencheTabelaCliente(pesquisa_nome_cli.getText());
+    }//GEN-LAST:event_btnPesquisaClienteActionPerformed
+
+    private void btnProdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdAddActionPerformed
+        adicionaProdutoSelecionado(
+                Integer.parseInt(String.valueOf(jtl_consultar_prod.getValueAt(
+                        jtl_consultar_prod.getSelectedRow(), 0))),
+                String.valueOf(jtl_consultar_prod.getValueAt(jtl_consultar_prod.getSelectedRow(), 1)),
+                Double.parseDouble(String.valueOf(jtl_consultar_prod.getValueAt(jtl_consultar_prod.getSelectedRow(), 2))));
+    }//GEN-LAST:event_btnProdAddActionPerformed
+
+    private void btnProdRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdRemActionPerformed
+        removeProdutoSelecionado(jtl_consultar_pro_selecionado.getSelectedRow());
+    }//GEN-LAST:event_btnProdRemActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        gravar();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jtl_consultar_pro_selecionadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtl_consultar_pro_selecionadoKeyReleased
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            calculaTotalVenda();
+        }
+    }//GEN-LAST:event_jtl_consultar_pro_selecionadoKeyReleased
+
+    private void gravar() {
+        vendaDTO.setDat_venda(new Date());
+        vendaDTO.setVal_venda(Double.parseDouble(TotalVenda.getText()));
+        clienteDTO.setId_cli(Integer.parseInt(String.valueOf(jtl_consultar_cliente.getValueAt(jtl_consultar_cliente.getSelectedRow(), 0))));
+
+        JOptionPane.showMessageDialog(null, vendaCTR.inserirVendaString(vendaDTO, clienteDTO, jtl_consultar_pro_selecionado));
+    }
+
+    private void preencheTabelaCliente(String nome_cli) {
+        try {
+            modelo_jtl_consultar_cli.setNumRows(0);
+
+            clienteDTO.setNome_cli(nome_cli);
+
+            rs = clienteCTR.consultarCliente(clienteDTO, 1);
+
+            while (rs.next()) {
+                modelo_jtl_consultar_cli.addRow(new Object[]{
+                    rs.getInt("id_cli"),
+                    rs.getString("nome_cli"),});
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro ao listar clientes: " + erTab);
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao exibir os valores" + erTab);
+        } finally {
+            clienteCTR.CloseDB();
+        }
+    }
+
+    public void preencheTabelaProduto(String nome_prod) {
+        try {
+            modelo_jtl_consultar_prod.setNumRows(0);
+
+            produtoDTO.setNome_prod(nome_prod);
+
+            rs = produtoCTR.consultarProduto(produtoDTO, 1);
+
+            while (rs.next()) {
+                modelo_jtl_consultar_prod.addRow(new Object[]{
+                    rs.getString("id_prod"),
+                    rs.getString("nome_prod"),
+                    rs.getString("p_venda_prod"),});
+            }
+        } catch (Exception e) {
+            System.out.println("Erro preencheTabelaProduto: " + e.getMessage());
+        } finally {
+            produtoCTR.CloseDB();
+        }
+    }
+
+    private void calculaTotalVenda() {
+        try {
+            double total = 0;
+            for (int i = 0; i < jtl_consultar_pro_selecionado.getRowCount(); i++) {
+                total += (Double.parseDouble(String.valueOf(jtl_consultar_pro_selecionado.getValueAt(i, 2)))
+                        * Integer.parseInt(String.valueOf(jtl_consultar_pro_selecionado.getValueAt(i, 3))));
+            }
+
+            TotalVenda.setText(String.valueOf(total));
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL:" + erTab);
+        }
+    }
+
+    private void adicionaProdutoSelecionado(int id_prod, String nome_prod, double p_venda_prod) {
+        try {
+            modelo_jtl_consultar_prod_selecionado.addRow(new Object[]{id_prod, nome_prod, p_venda_prod});
+            calculaTotalVenda();
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL:" + erTab);
+        }
+    }
+
+    private void removeProdutoSelecionado(int linha_selecionada) {
+        try {
+            if (linha_selecionada >= 0) {
+                modelo_jtl_consultar_prod_selecionado.removeRow(linha_selecionada);
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL:" + erTab);
+        }
+    }
+
+    private void liberaCampos(boolean enabled) {
+        pesquisa_nome_cli.setEnabled(enabled);
+        btnPesquisaCliente.setEnabled(enabled);
+        jtl_consultar_cliente.setEnabled(enabled);
+        pesquisa_nome_prod.setEnabled(enabled);
+        btnPesquisaProd.setEnabled(enabled);
+        jtl_consultar_prod.setEnabled(enabled);
+        btnProdAdd.setEnabled(enabled);
+        btnProdRem.setEnabled(enabled);
+        jtl_consultar_pro_selecionado.setEnabled(enabled);
+        TotalVenda.setEnabled(enabled);
+    }
+
+    private void limpaCampos() {
+        pesquisa_nome_cli.setText("");
+        pesquisa_nome_prod.setText("");
+        modelo_jtl_consultar_cli.setNumRows(0);
+        modelo_jtl_consultar_prod.setNumRows(0);
+        modelo_jtl_consultar_prod_selecionado.setNumRows(0);
+    }
+
+    private void liberaBotoes(boolean novo, boolean salvar, boolean cancelar, boolean sair) {
+        btnNovo.setEnabled(novo);
+        btnSalvar.setEnabled(salvar);
+        btnCancelar.setEnabled(cancelar);
+        btnSair.setEnabled(sair);
+    }
+
+    private boolean verificaPreenchimento() {
+        if (jtl_consultar_cliente.getSelectedRowCount() <= 0) {
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um cliente.");
+            jtl_consultar_cliente.requestFocus();
+            return false;
+        } else {
+            if (jtl_consultar_pro_selecionado.getRowCount() <= 0) {
+                JOptionPane.showMessageDialog(null, "É necessário adicionar pelo menos um produto ao pedido");
+                jtl_consultar_pro_selecionado.requestFocus();
+                return false;
+            } else {
+                int verifica = 0;
+
+                for (int i = 0; i < jtl_consultar_pro_selecionado.getRowCount(); i++) {
+                    if (String.valueOf(jtl_consultar_pro_selecionado.getValueAt(i, 3)).equalsIgnoreCase("null")) {
+                        verifica++;
+                    }
+                }
+
+                if (verifica > 0) {
+                    JOptionPane.showMessageDialog(null, "A quantidade de cada produto deve ser informada");
+                    jtl_consultar_pro_selecionado.requestFocus();
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalVenda;
@@ -259,18 +535,18 @@ public class VendaVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnProdRem;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField inpPesquisaCliente;
-    private javax.swing.JTextField inpPesquisaNomeProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jtl_consultar_cliente;
+    private javax.swing.JTable jtl_consultar_pro_selecionado;
+    private javax.swing.JTable jtl_consultar_prod;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblPesquisaNomeProd;
-    private javax.swing.JTable tablePesquisaCliente;
-    private javax.swing.JTable tablePesquisaProdutos;
-    private javax.swing.JTable tableProdutoSelecionado;
+    private javax.swing.JTextField pesquisa_nome_cli;
+    private javax.swing.JTextField pesquisa_nome_prod;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,9 +76,19 @@ public class PrincipalVIEW extends javax.swing.JFrame {
 
         menuVenda.setMnemonic('e');
         menuVenda.setText("Venda");
+        menuVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVendaActionPerformed(evt);
+            }
+        });
 
         itemMenuVenda.setMnemonic('d');
         itemMenuVenda.setText("Realizar venda");
+        itemMenuVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuVendaActionPerformed(evt);
+            }
+        });
         menuVenda.add(itemMenuVenda);
 
         menuBar.add(menuVenda);
@@ -98,11 +108,11 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1060, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
 
         pack();
@@ -140,6 +150,24 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         // TODO add your handling code here:
         abreClienteView();
     }//GEN-LAST:event_itemMenuClienteActionPerformed
+
+    private void abreVendaView() {
+        VendaVIEW vendaView = new VendaVIEW();
+        this.desktopPane.add(vendaView);
+
+        vendaView.setVisible(true);
+        vendaView.setPosicao();
+    }
+    
+    private void menuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuVendaActionPerformed
+
+    private void itemMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuVendaActionPerformed
+        // TODO add your handling code here:
+                abreVendaView();
+
+    }//GEN-LAST:event_itemMenuVendaActionPerformed
 
     private void abreClienteView() {
         ClienteView clienteView = new ClienteView();
