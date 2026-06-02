@@ -33,7 +33,7 @@ public class VendaDAO {
             stmt = ConexaoDAO.conn.createStatement();
             stmt1 = ConexaoDAO.conn.createStatement();
 
-            String comando1 = "insert into venda(dat_vend, val_vend, id_cli) values ( "
+            String comando1 = "insert into venda(dat_vend, val_vend, id_cli) values ("
                     + "to_date('" + date.format(vendaDTO.getDat_venda()) + "', 'DD/MM/YYYY'), "
                     + vendaDTO.getVal_venda() + ", "
                     + clienteDTO.getId_cli() + ");";
@@ -44,23 +44,22 @@ public class VendaDAO {
 
             for (int cont = 0; cont < produtos.getRowCount(); cont++) {
                 String comando2 = "insert into produto_venda(id_vend, id_prod, val_prod, qtd_prod) values ("
-                        + rs.getInt("id_venda") + ", "
+                        + rs.getInt("id_vend") + ", "
                         + produtos.getValueAt(cont, 0) + ", "
                         + produtos.getValueAt(cont, 2) + ", "
                         + produtos.getValueAt(cont, 3) + "); ";
-                
+
                 stmt1.execute(comando2);
-                        
             }
-            
+
             ConexaoDAO.conn.commit();
-            
+
             stmt.close();
             stmt1.close();
             rs.close();
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage() + e);
             return false;
         } finally {
             ConexaoDAO.closeDB();
