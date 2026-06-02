@@ -22,7 +22,7 @@ public class ConexaoDAO {
 
             DriverManager.registerDriver(new org.postgresql.Driver());
 
-            String url = "jdbc:postgresql://localhost:5433/" + dsn;
+            String url = "jdbc:postgresql://localhost:5432/" + dsn;
 
             conn = DriverManager.getConnection(url, user, password);
 
