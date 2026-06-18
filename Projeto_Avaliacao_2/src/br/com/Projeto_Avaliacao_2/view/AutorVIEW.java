@@ -7,17 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.sql.ResultSet;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 public class AutorVIEW extends javax.swing.JInternalFrame {
 
@@ -36,9 +39,9 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
     private JLabel jLabel_pesquisa_nome;
     private JTextField txt_nome;
     private JTextField txt_nacionalidade;
-    private JTextField txt_data_nascimento;
+    private JFormattedTextField txt_data_nascimento;
     private JTextField txt_email;
-    private JTextField txt_telefone;
+    private JFormattedTextField txt_telefone;
     private JTextField txt_pesquisa_nome;
     private JButton btnNovo;
     private JButton btnSalvar;
@@ -70,9 +73,9 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
         jLabel_pesquisa_nome = new JLabel();
         txt_nome = new JTextField();
         txt_nacionalidade = new JTextField();
-        txt_data_nascimento = new JTextField();
+        txt_data_nascimento = criaCampoData();
         txt_email = new JTextField();
-        txt_telefone = new JTextField();
+        txt_telefone = criaCampoTelefone();
         txt_pesquisa_nome = new JTextField();
         btnNovo = new JButton();
         btnSalvar = new JButton();
@@ -98,9 +101,7 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
 
         txt_nome.setColumns(20);
         txt_nacionalidade.setColumns(20);
-        txt_data_nascimento.setColumns(20);
         txt_email.setColumns(20);
-        txt_telefone.setColumns(20);
         txt_pesquisa_nome.setColumns(20);
 
         btnNovo.setIcon(new ImageIcon(getClass().getResource("/br/com/Projeto_Avaliacao_2/view/imagens/novo.png")));
@@ -296,6 +297,27 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
     }// </editor-fold>
 
     private void gravar() {
+        if (txt_nome.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe o nome do autor.");
+            return;
+        }
+        if (txt_nacionalidade.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe a nacionalidade do autor.");
+            return;
+        }
+        if (!campoMascaraCompleta(txt_data_nascimento.getText(), "##/##/####")) {
+            JOptionPane.showMessageDialog(null, "Informe a data de nascimento no formato dd/mm/aaaa.");
+            return;
+        }
+        if (txt_email.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe o email do autor.");
+            return;
+        }
+        if (!campoMascaraCompleta(txt_telefone.getText(), "(##) #####-####")) {
+            JOptionPane.showMessageDialog(null, "Informe o telefone no formato (xx) xxxxx-xxxx.");
+            return;
+        }
+
         autorDTO.setNome(txt_nome.getText());
         autorDTO.setNacionalidade(txt_nacionalidade.getText());
         autorDTO.setDataNascimento(txt_data_nascimento.getText());
@@ -343,9 +365,9 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
     private void limpaCampos() {
         txt_nome.setText("");
         txt_nacionalidade.setText("");
-        txt_data_nascimento.setText("");
+        txt_data_nascimento.setValue(null);
         txt_email.setText("");
-        txt_telefone.setText("");
+        txt_telefone.setValue(null);
         txt_pesquisa_nome.setText("");
         modelo_jtl_consultar_autor.setNumRows(0);
         id_autor_selecionado = 0;
@@ -400,5 +422,35 @@ public class AutorVIEW extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = getSize();
         setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+
+    private boolean campoMascaraCompleta(String valor, String mascara) {
+        return valor != null && !valor.trim().isEmpty() && !valor.contains("_") && valor.length() == mascara.length();
+    }
+
+    private JFormattedTextField criaCampoData() {
+        try {
+            MaskFormatter mascara = new MaskFormatter("##/##/####");
+            mascara.setPlaceholderCharacter('_');
+            JFormattedTextField campo = new JFormattedTextField(mascara);
+            campo.setColumns(20);
+            campo.setFocusLostBehavior(JFormattedTextField.COMMIT_OR_REVERT);
+            return campo;
+        } catch (ParseException e) {
+            throw new IllegalStateException("Falha ao criar campo de data", e);
+        }
+    }
+
+    private JFormattedTextField criaCampoTelefone() {
+        try {
+            MaskFormatter mascara = new MaskFormatter("(##) #####-####");
+            mascara.setPlaceholderCharacter('_');
+            JFormattedTextField campo = new JFormattedTextField(mascara);
+            campo.setColumns(20);
+            campo.setFocusLostBehavior(JFormattedTextField.COMMIT_OR_REVERT);
+            return campo;
+        } catch (ParseException e) {
+            throw new IllegalStateException("Falha ao criar campo de telefone", e);
+        }
     }
 }
