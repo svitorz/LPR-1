@@ -1,36 +1,20 @@
-package br.com.projeto_4.dao;
+package br.com.Projeto_Avaliacao_2.dao;
 
-/**
- * Importando as classes necessárias para trabalhar nesta classe
- */
 import java.sql.*;
 
-/**
- * Essa classe contém os métodos para abrir e fechar o banco de dados
- */
 public class ConexaoDAO {
 
     //Criando um atributo do tipo Connection que servira para guardar a conexao 
     //com o banco de dados
     public static Connection con = null;
 
-    /**
-     * Método construtor da classe
-     *
-     * @param Não recebe nenhum parametro
-     */
     public ConexaoDAO() {
     }
 
-    /**
-     * Método que abre a conexão com o banco de dados é do tipo static para que
-     * não seja necessário instanciar um objeto da classe, chamando os metodos
-     * de forma direta.Ex: classe.nome_do_metodo
-     */
     public static void ConnectDB() {
         try {
             //Dados para conectar com o banco de dados Postgres
-            String dsn = "projeto_4"; //nome do banco de dados(igual ao criado no Postgres)
+            String dsn = "biblioteca"; //nome do banco de dados(igual ao criado no Postgres)
             String user = "postgres"; //nome do usuario utilizado para se conectar
             String senha = "postdba"; //senha do usuario acima informado
           

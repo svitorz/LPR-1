@@ -9,6 +9,8 @@ import br.com.Projeto_Avaliacao_2.dto.LivroDTO;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -35,6 +37,7 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
     private ResultSet rs;
     private DefaultTableModel modelo_jtl_consultar_categoria;
     private DefaultTableModel modelo_jtl_consultar_autor;
+    private DefaultTableModel modelo_jtl_consultar_livro;
 
     private JLabel jLabel_titulo;
     private JLabel jLabel_ano_publicacao;
@@ -44,20 +47,32 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
     private JLabel jLabel_quantidade_paginas;
     private JLabel jLabel_categoria;
     private JLabel jLabel_autor;
+    private JLabel jLabel_pesquisa_categoria;
+    private JLabel jLabel_pesquisa_autor;
+    private JLabel jLabel_pesquisa_livro;
+    private JLabel jLabel_lista_livros;
     private JTextField txt_titulo;
     private JTextField txt_ano_publicacao;
     private JTextField txt_isbn;
     private JTextField txt_editora;
     private JTextField txt_edicao;
     private JTextField txt_quantidade_paginas;
+    private JTextField txt_pesquisa_categoria;
+    private JTextField txt_pesquisa_autor;
+    private JTextField txt_pesquisa_livro;
     private JButton btnNovo;
     private JButton btnSalvar;
     private JButton btnCancelar;
     private JButton btnSair;
+    private JButton btnPesquisarCategoria;
+    private JButton btnPesquisarAutor;
+    private JButton btnPesquisarLivro;
     private JTable jtl_consultar_categoria;
     private JTable jtl_consultar_autor;
+    private JTable jtl_consultar_livro;
     private JScrollPane jScrollPane_categoria;
     private JScrollPane jScrollPane_autor;
+    private JScrollPane jScrollPane_livro;
 
     public LivroVIEW() {
         initComponents();
@@ -72,8 +87,16 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         liberaBotoes(true, false, false, true);
         modelo_jtl_consultar_categoria = (DefaultTableModel) jtl_consultar_categoria.getModel();
         modelo_jtl_consultar_autor = (DefaultTableModel) jtl_consultar_autor.getModel();
+        modelo_jtl_consultar_livro = (DefaultTableModel) jtl_consultar_livro.getModel();
         preencheTabela_Categoria("");
         preencheTabela_Autor("");
+        preencheTabela_Livro();
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                setPosicao();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -86,20 +109,32 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         jLabel_quantidade_paginas = new JLabel();
         jLabel_categoria = new JLabel();
         jLabel_autor = new JLabel();
+        jLabel_pesquisa_categoria = new JLabel();
+        jLabel_pesquisa_autor = new JLabel();
+        jLabel_pesquisa_livro = new JLabel();
+        jLabel_lista_livros = new JLabel();
         txt_titulo = new JTextField();
         txt_ano_publicacao = new JTextField();
         txt_isbn = new JTextField();
         txt_editora = new JTextField();
         txt_edicao = new JTextField();
         txt_quantidade_paginas = new JTextField();
+        txt_pesquisa_categoria = new JTextField();
+        txt_pesquisa_autor = new JTextField();
+        txt_pesquisa_livro = new JTextField();
         btnNovo = new JButton();
         btnSalvar = new JButton();
         btnCancelar = new JButton();
         btnSair = new JButton();
+        btnPesquisarCategoria = new JButton();
+        btnPesquisarAutor = new JButton();
+        btnPesquisarLivro = new JButton();
         jScrollPane_categoria = new JScrollPane();
         jScrollPane_autor = new JScrollPane();
+        jScrollPane_livro = new JScrollPane();
         jtl_consultar_categoria = new JTable();
         jtl_consultar_autor = new JTable();
+        jtl_consultar_livro = new JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -115,6 +150,10 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         jLabel_quantidade_paginas.setText("Quantidade de Paginas");
         jLabel_categoria.setText("Categoria");
         jLabel_autor.setText("Autor");
+        jLabel_pesquisa_categoria.setText("Pesquisar Categoria");
+        jLabel_pesquisa_autor.setText("Pesquisar Autor");
+        jLabel_pesquisa_livro.setText("Pesquisar Livro");
+        jLabel_lista_livros.setText("Livros");
 
         txt_titulo.setColumns(20);
         txt_ano_publicacao.setColumns(20);
@@ -122,6 +161,9 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         txt_editora.setColumns(20);
         txt_edicao.setColumns(20);
         txt_quantidade_paginas.setColumns(20);
+        txt_pesquisa_categoria.setColumns(20);
+        txt_pesquisa_autor.setColumns(20);
+        txt_pesquisa_livro.setColumns(20);
 
         btnNovo.setIcon(new ImageIcon(getClass().getResource("/br/com/Projeto_Avaliacao_2/view/imagens/novo.png")));
         btnNovo.setText("Novo");
@@ -138,6 +180,7 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
                 autorDTO.setId(0);
                 preencheTabela_Categoria("");
                 preencheTabela_Autor("");
+                preencheTabela_Livro();
             }
         });
 
@@ -172,6 +215,7 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
                 autorDTO.setId(0);
                 preencheTabela_Categoria("");
                 preencheTabela_Autor("");
+                preencheTabela_Livro();
             }
         });
 
@@ -181,6 +225,33 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 dispose();
+            }
+        });
+
+        btnPesquisarCategoria.setIcon(new ImageIcon(getClass().getResource("/br/com/Projeto_Avaliacao_2/view/imagens/pesquisar.png")));
+        btnPesquisarCategoria.setText("Pesquisar");
+        btnPesquisarCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                preencheTabela_Categoria(txt_pesquisa_categoria.getText());
+            }
+        });
+
+        btnPesquisarAutor.setIcon(new ImageIcon(getClass().getResource("/br/com/Projeto_Avaliacao_2/view/imagens/pesquisar.png")));
+        btnPesquisarAutor.setText("Pesquisar");
+        btnPesquisarAutor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                preencheTabela_Autor(txt_pesquisa_autor.getText());
+            }
+        });
+
+        btnPesquisarLivro.setIcon(new ImageIcon(getClass().getResource("/br/com/Projeto_Avaliacao_2/view/imagens/pesquisar.png")));
+        btnPesquisarLivro.setText("Pesquisar");
+        btnPesquisarLivro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                preencheTabela_Livro(txt_pesquisa_livro.getText());
             }
         });
 
@@ -230,6 +301,19 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         });
         jScrollPane_autor.setViewportView(jtl_consultar_autor);
 
+        jtl_consultar_livro.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{"ID", "Titulo", "Ano", "ISBN", "Editora", "Edicao", "Paginas", "Categoria", "Autores"}
+        ) {
+            boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false};
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        jScrollPane_livro.setViewportView(jtl_consultar_livro);
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,10 +338,20 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel_categoria)
+                                                        .addComponent(jLabel_pesquisa_categoria)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(txt_pesquisa_categoria, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(btnPesquisarCategoria))
                                                         .addComponent(jScrollPane_categoria, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel_autor)
+                                                        .addComponent(jLabel_pesquisa_autor)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(txt_pesquisa_autor, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(btnPesquisarAutor))
                                                         .addComponent(jScrollPane_autor, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(btnNovo)
@@ -266,7 +360,17 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(btnCancelar)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnSair)))
+                                                .addComponent(btnSair))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel_lista_livros)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel_pesquisa_livro)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txt_pesquisa_livro, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnPesquisarLivro))
+                                        .addComponent(jScrollPane_livro))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -301,17 +405,38 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel_categoria)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane_categoria, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel_pesquisa_categoria)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_pesquisa_categoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnPesquisarCategoria))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jScrollPane_categoria, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel_autor)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane_autor, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jLabel_pesquisa_autor)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txt_pesquisa_autor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnPesquisarAutor))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jScrollPane_autor, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnNovo)
                                         .addComponent(btnSalvar)
                                         .addComponent(btnCancelar)
                                         .addComponent(btnSair))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel_lista_livros)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_pesquisa_livro)
+                                        .addComponent(txt_pesquisa_livro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPesquisarLivro))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane_livro, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,27 +444,34 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
     }
 
     private boolean gravar() {
-        if (txt_titulo.getText().trim().isEmpty()) {
+        String titulo = txt_titulo.getText().trim();
+        String anoPublicacaoTexto = txt_ano_publicacao.getText().trim();
+        String isbn = txt_isbn.getText().trim();
+        String editora = txt_editora.getText().trim();
+        String edicaoTexto = txt_edicao.getText().trim();
+        String quantidadePaginasTexto = txt_quantidade_paginas.getText().trim();
+
+        if (titulo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe o titulo do livro.");
             return false;
         }
-        if (txt_ano_publicacao.getText().trim().isEmpty()) {
+        if (anoPublicacaoTexto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe o ano de publicação do livro.");
             return false;
         }
-        if (txt_isbn.getText().trim().isEmpty()) {
+        if (isbn.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe o ISBN do livro.");
             return false;
         }
-        if (txt_editora.getText().trim().isEmpty()) {
+        if (editora.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a editora do livro.");
             return false;
         }
-        if (txt_edicao.getText().trim().isEmpty()) {
+        if (edicaoTexto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a edição do livro.");
             return false;
         }
-        if (txt_quantidade_paginas.getText().trim().isEmpty()) {
+        if (quantidadePaginasTexto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a quantidade de páginas do livro.");
             return false;
         }
@@ -352,12 +484,26 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
             return false;
         }
 
-        livroDTO.setTitulo(txt_titulo.getText());
-        livroDTO.setAnoPublicacao(Integer.parseInt(txt_ano_publicacao.getText()));
-        livroDTO.setIsbn(txt_isbn.getText());
-        livroDTO.setEditora(txt_editora.getText());
-        livroDTO.setEdicao(Integer.parseInt(txt_edicao.getText()));
-        livroDTO.setQuantidadePaginas(Integer.parseInt(txt_quantidade_paginas.getText()));
+        try {
+            int anoPublicacao = Integer.parseInt(anoPublicacaoTexto);
+            int edicao = Integer.parseInt(edicaoTexto);
+            int quantidadePaginas = Integer.parseInt(quantidadePaginasTexto);
+
+            if (anoPublicacao <= 0 || edicao <= 0 || quantidadePaginas <= 0) {
+                JOptionPane.showMessageDialog(null, "Os campos numéricos devem ser maiores que zero.");
+                return false;
+            }
+
+            livroDTO.setTitulo(titulo);
+            livroDTO.setAnoPublicacao(anoPublicacao);
+            livroDTO.setIsbn(isbn);
+            livroDTO.setEditora(editora);
+            livroDTO.setEdicao(edicao);
+            livroDTO.setQuantidadePaginas(quantidadePaginas);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ano de publicação, edição e quantidade de páginas devem conter apenas números.");
+            return false;
+        }
         livroDTO.setIdCategoria(categoriaDTO.getId());
 
         String mensagem = livroCTR.inserirLivroString(livroDTO, categoriaDTO, autorDTO);
@@ -434,6 +580,39 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         }
     }
 
+    private void preencheTabela_Livro() {
+        preencheTabela_Livro("");
+    }
+
+    private void preencheTabela_Livro(String titulo) {
+        try {
+            modelo_jtl_consultar_livro.setNumRows(0);
+            if (titulo == null || titulo.trim().isEmpty()) {
+                rs = livroCTR.listarLivros();
+            } else {
+                livroDTO.setTitulo(titulo.trim());
+                rs = livroCTR.consultarLivro(livroDTO, 1);
+            }
+            while (rs != null && rs.next()) {
+                modelo_jtl_consultar_livro.addRow(new Object[]{
+                    rs.getInt("id"),
+                    rs.getString("titulo"),
+                    rs.getInt("ano_publicacao"),
+                    rs.getString("isbn"),
+                    rs.getString("editora"),
+                    rs.getInt("edicao"),
+                    rs.getInt("quantidade_paginas"),
+                    rs.getString("categoria"),
+                    rs.getString("autores")
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela de livros.\n" + e.getMessage());
+        } finally {
+            livroCTR.closeDB();
+        }
+    }
+
     public void setPosicao() {
         if (getDesktopPane() == null) {
             return;
@@ -442,6 +621,12 @@ public class LivroVIEW extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = getSize();
         setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        setPosicao();
     }
 
 }
