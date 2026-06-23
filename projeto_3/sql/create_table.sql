@@ -53,5 +53,5 @@ CREATE TABLE produto_venda
     val_prod double precision,
     qtd_prod integer,
     CONSTRAINT produto_venda_id_prod_fkey FOREIGN KEY (id_prod) REFERENCES produto (id_prod),
-    CONSTRAINT produto_venda_id_vend_fkey FOREIGN KEY (id_vend) REFERENCES produto (id_vend),
+    CONSTRAINT produto_venda_id_vend_fkey FOREIGN KEY (id_vend) REFERENCES venda (id_vend),
 );

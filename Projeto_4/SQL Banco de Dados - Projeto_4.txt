@@ -1,0 +1,174 @@
+# Apresentação — Aplicativo de organização de eventos acadêmicos
+
+## 1. Introdução
+
+* Projeto: **AcademicIF Events**
+* Cenário: Aplicativo de organização de eventos acadêmicos
+* Alunos: Mariana Pires, Vitor 
+---
+
+## 2. Cenário Escolhido
+
+### Aplicativo de Eventos Acadêmicos
+
+Funcionalidades previstas:
+
+* Cadastro de eventos
+* Gerenciamento de participantes
+* Inscrições online
+* Divulgação de programações
+* Comunicação institucional
+
+### Objetivo do sistema
+
+Centralizar e automatizar a organização de eventos acadêmicos em uma única plataforma.
+
+---
+
+## 3. Metodologia Ágil Utilizada
+
+### Frameworks utilizados
+
+* Scrum
+* Kanban
+
+### Cerimônias previstas
+
+* Sprint Planning
+* Daily Scrum
+* Sprint Review
+* Sprint Retrospective
+
+### Artefatos utilizados
+
+* Product Backlog
+* Sprint Backlog
+* Incremento do Produto
+* Quadro Kanban
+
+---
+
+## 4. Ferramentas Escolhidas
+
+### [Jira](https://www.atlassian.com/software/jira?utm_source=chatgpt.com)
+
+* Gerenciamento de tarefas
+* Organização de backlog e sprints
+* Visualização Kanban
+
+### [GitHub](https://github.com?utm_source=chatgpt.com)
+
+* Controle de versão
+* Pull Requests e branches
+* Documentação técnica
+
+### [Confluence](https://www.atlassian.com/software/confluence?utm_source=chatgpt.com)
+
+* Documentação centralizada
+* Registro de decisões técnicas
+* Organização do projeto
+
+### [Discord](https://discord.com?utm_source=chatgpt.com)
+
+* Comunicação rápida
+* Compartilhamento de arquivos
+* Reuniões e alinhamentos
+
+---
+
+## 5. Organização do Projeto
+
+### Estrutura do Kanban
+
+* Backlog
+* To Do
+* Doing
+* Done
+
+### Exemplos de tarefas
+
+* Criar repositório
+* Desenvolver autenticação
+* Cadastro de usuários
+* Inscrição em eventos
+* Painel administrativo
+* Documentação do sistema
+
+---
+
+## 6. Repositório de Versionamento
+
+### Repositório: AcademicIF-Events
+
+Estrutura inicial contendo:
+
+* README
+* Descrição do sistema
+* Controle de commits
+* Organização de documentação
+
+### Benefícios
+
+* Histórico de alterações
+* Desenvolvimento colaborativo
+* Simulação de ambiente profissional
+
+---
+
+## 7. Documentação do Projeto
+
+### Conteúdo documentado no Confluence
+
+* Objetivos do sistema
+* Público-alvo
+* Regras de negócio
+* Backlog inicial
+* Funcionalidades previstas
+* Organização da equipe
+
+### Importância
+
+Centralização das informações e apoio ao acompanhamento do projeto.
+
+---
+
+## 8. Comunicação da Equipe
+
+### Estrutura do Discord
+
+* Canal geral
+* Avisos
+* Dúvidas
+* Compartilhamento de links e arquivos
+
+### Benefícios
+
+* Comunicação rápida
+* Melhor alinhamento da equipe
+* Facilidade na colaboração
+
+---
+
+## 9. Resultados Obtidos
+
+As ferramentas escolhidas permitiram:
+
+* Melhor organização das tarefas
+* Controle eficiente do projeto
+* Comunicação contínua
+* Simulação de práticas reais de mercado
+* Aplicação prática de Scrum e Kanban
+
+---
+
+## 10. Considerações Finais
+
+O projeto demonstrou a importância da integração entre:
+
+* Gestão
+* Versionamento
+* Documentação
+* Comunicação
+
+A experiência aproximou o ambiente acadêmico das práticas utilizadas no desenvolvimento profissional de software.
+
